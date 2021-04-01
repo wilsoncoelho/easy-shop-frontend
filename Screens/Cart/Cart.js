@@ -21,7 +21,8 @@ import { connect } from "react-redux";
 import * as actions from "../../Redux/Actions/cartActions";
 import Icon from "react-native-vector-icons/FontAwesome5";
 import { SwipeListView } from "react-native-swipe-list-view";
-import CartItem from './CartItem'
+import CartItem from "./CartItem";
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 let { height, width } = Dimensions.get("window");
 
 const Cart = (props) => {
@@ -36,14 +37,12 @@ const Cart = (props) => {
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
           <SwipeListView
             data={props.cartItems}
-            renderItem={(data, index) => (
-             <CartItem key={index} item={data} />
-            )}
+            renderItem={(data, index) => <CartItem key={index} item={data} />}
             renderHiddenItem={(data) => (
               <View style={styles.hiddenContainer}>
-                <TouchableOpacity 
-                style={styles.hiddenButton}
-                onPress={() => props.removeFromCart(data.item)}
+                <TouchableOpacity
+                  style={styles.hiddenButton}
+                  onPress={() => props.removeFromCart(data.item)}
                 >
                   <Icon name="trash" color={"white"} size={30} />
                 </TouchableOpacity>
@@ -56,20 +55,25 @@ const Cart = (props) => {
             leftOpenValue={75}
             stopLeftSwipe={75}
             rightOpenValue={-75}
-            />
-         
+          />
+
           <View style={styles.bottomContainer}>
             <Left>
               <Text style={styles.price}>$ {Math.round(total)}</Text>
             </Left>
             <Right>
-              <Button title="Clear" onPress={() => props.clearCart()} />
+              <EasyButton medium danger onPress={() => props.clearCart()}>
+                <Text style={{ color: "white" }}>Clear</Text>
+              </EasyButton>
             </Right>
             <Right>
-              <Button
-                title="Checkout"
+              <EasyButton
+                medium
+                primary
                 onPress={() => props.navigation.navigate("Checkout")}
-              />
+              >
+                <Text style={{ color: "white" }}>Checkout</Text>
+              </EasyButton>
             </Right>
           </View>
         </Container>
@@ -94,7 +98,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     clearCart: () => dispatch(actions.clearCart()),
-    removeFromCart:(item) => dispatch(actions.removeFromCart(item))
+    removeFromCart: (item) => dispatch(actions.removeFromCart(item)),
   };
 };
 
@@ -106,7 +110,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
- 
+
   bottomContainer: {
     flexDirection: "row",
     position: "absolute",
@@ -122,15 +126,15 @@ const styles = StyleSheet.create({
   },
   hiddenContainer: {
     flex: 1,
-    justifyContent: 'flex-end',
-    flexDirection: 'row'
+    justifyContent: "flex-end",
+    flexDirection: "row",
   },
   hiddenButton: {
-    backgroundColor: 'red',
-    justifyContent: 'center',
-    alignItems: 'flex-end',
+    backgroundColor: "red",
+    justifyContent: "center",
+    alignItems: "flex-end",
     paddingRight: 25,
     height: 70,
-    width: width / 1.2
-  }
+    width: width / 1.2,
+  },
 });

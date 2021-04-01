@@ -2,40 +2,37 @@ import React, { useEffect, useContext, useState } from "react";
 import { StyleSheet, Text, View, Button } from "react-native";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Input from "../../Shared/Form/Input";
-import Error from '../../Shared/Error'
-
+import Error from "../../Shared/Error";
+import EasyButton from '../../Shared/StyledComponents/EasyButton'
 // Context
-import AuthGlobal from '../../Context/store/AuthGlobal'
-import {loginUser} from '../../Context/actions/Auth.actions' 
+import AuthGlobal from "../../Context/store/AuthGlobal";
+import { loginUser } from "../../Context/actions/Auth.actions";
 
 const Login = (props) => {
-
-  const context = useContext(AuthGlobal)
+  const context = useContext(AuthGlobal);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState("")
+  const [error, setError] = useState("");
 
-useEffect(() => {
-  if(context.stateUser.isAuthenticated === true){
-    props.navigation.navigate('User Profile')
-  }
-  return () => {
-    
-  }
-}, [context.stateUser.isAuthenticated])
+  useEffect(() => {
+    if (context.stateUser.isAuthenticated === true) {
+      props.navigation.navigate("User Profile");
+    }
+    return () => {};
+  }, [context.stateUser.isAuthenticated]);
 
   const handleSubmit = () => {
-      const user ={
-          email,
-          password
-      }
+    const user = {
+      email,
+      password,
+    };
 
-      if(email ==="" || password===""){
-        setError("Please fill in your credentials")
-      }else{
-          loginUser(user, context.dispatch)
-      }
-  }
+    if (email === "" || password === "") {
+      setError("Please fill in your credentials");
+    } else {
+      loginUser(user, context.dispatch);
+    }
+  };
 
   return (
     <FormContainer>
@@ -44,7 +41,9 @@ useEffect(() => {
         name={"email"}
         id={"email"}
         value={email}
-        onChangeText={(text)=> {setEmail(text)}}
+        onChangeText={(text) => {
+          setEmail(text);
+        }}
       />
       <Input
         placeholder="Enter password"
@@ -52,17 +51,28 @@ useEffect(() => {
         id={"password"}
         secureTextEntry={true}
         value={password}
-        onChangeText={(text)=> {setPassword(text)}}
+        onChangeText={(text) => {
+          setPassword(text);
+        }}
       />
       <View style={styles.buttonGroup}>
-        <Button title="Login" onPress={()=>handleSubmit()}/>
+        <EasyButton medium primary onPress={() => handleSubmit()}>
+          <Text style={{ color: "white" }}>Login</Text>
+        </EasyButton>
       </View>
-      <View style={[styles.buttonGroup, {marginTop:40}]}>
-          <Text style={styles.middleText}>Don't have an account yet?</Text>
-          {error?<Error message={error}/>:null}
-        <Button title="Register" onPress={()=>{
-            props.navigation.navigate('Register')
-        }}/>
+      <View style={[styles.buttonGroup, { marginTop: 40 }]}>
+        <Text style={styles.middleText}>Don't have an account yet?</Text>
+        {error ? <Error message={error} /> : null}
+
+        <EasyButton
+          medium
+          secondary
+          onPress={() => {
+            props.navigation.navigate("Register");
+          }}
+        >
+          <Text style={{ color: "white" }}>Register</Text>
+        </EasyButton>
       </View>
     </FormContainer>
   );
@@ -71,13 +81,13 @@ useEffect(() => {
 export default Login;
 
 const styles = StyleSheet.create({
-   buttonGroup:{
-    width:'80%',
-    alignItems:'center'
-   },
-   middleText:{
-       marginBottom:20,
-       alignItems:'center',
-       color:'black'
-   }
+  buttonGroup: {
+    width: "80%",
+    alignItems: "center",
+  },
+  middleText: {
+    marginBottom: 20,
+    alignItems: "center",
+    color: "black",
+  },
 });

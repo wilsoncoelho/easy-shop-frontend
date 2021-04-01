@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { StyleSheet, Button, View } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import Input from "../../Shared/Form/Input";
 import FormContainer from "../../Shared/Form/FormContainer";
 import Error from "../../Shared/Error";
@@ -7,6 +7,7 @@ import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view
 import axios from 'axios'
 import baseURL from '../../assets/common/baseUrl'
 import Toast from 'react-native-toast-message'
+import EasyButton from "../../Shared/StyledComponents/EasyButton";
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -100,15 +101,27 @@ const Register = (props) => {
         />
         <View>{error ? <Error message={error} /> : null}</View>
         <View style={[styles.buttonGroup, { marginTop: 40 }]}>
-          <Button title="Register" onPress={() => register()} />
+        
+
+          <EasyButton
+          large
+          primary
+          onPress={() => register()}
+        >
+          <Text style={{ color: "white" }}>Register</Text>
+        </EasyButton>
         </View>
         <View style={[styles.buttonGroup, { marginTop: 40 }]}>
-          <Button
-            title="Back to Login"
-            onPress={() => {
-              props.navigation.navigate("Login");
-            }}
-          />
+
+                    <EasyButton
+          large
+          secondary
+          onPress={() => {
+            props.navigation.navigate("Login");
+          }}
+        >
+          <Text style={{ color: "white" }}>Back to Login</Text>
+        </EasyButton>
         </View>
       </FormContainer>
     </KeyboardAwareScrollView>

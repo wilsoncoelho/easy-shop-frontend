@@ -21,7 +21,7 @@ export default function App() {
   return (
     <Auth>
       <Provider store={store}>
-        <StatusBar hidden />
+        {/* <StatusBar hidden /> */}
         <NavigationContainer>
           <Header />
           <Main />
