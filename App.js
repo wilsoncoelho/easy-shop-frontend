@@ -6,7 +6,7 @@ import Toast from "react-native-toast-message";
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 
-//Context API
+//Context API imports
 import Auth from "./Context/store/Auth";
 
 //Navigators
