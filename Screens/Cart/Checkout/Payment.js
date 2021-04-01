@@ -53,25 +53,26 @@ const Payment = (props) => {
           );
         })}
 
-{selected == 3 ? (
+        {selected == 3 ? (
           <Picker
             mode="dropdown"
-            iosIcon={<Icon name={'arrow-down'} />}
+            iosIcon={<Icon name={"arrow-down"} />}
             headerStyle={{ backgroundColor: "orange" }}
-            headerBackButtonTextStyle={{color:'#fff'}}
-            headerTitleStyle={{color:'#fff'}}
+            headerBackButtonTextStyle={{ color: "#fff" }}
+            headerTitleStyle={{ color: "#fff" }}
             selectedValue={card}
-            onValueChange={(x)=>setCard(x)}
-
+            onValueChange={(x) => setCard(x)}
           >
-              {paymentCards.map((c, index)=>{
-                  return <Picker.Item key={c.name} label={c.name} value={c.name}/>
-              })}
-
+            {paymentCards.map((c, index) => {
+              return <Picker.Item key={c.name} label={c.name} value={c.name} />;
+            })}
           </Picker>
-        ) :null }
-        <View style={{ marginTop:60, alignSelf:'center'}}>
-            <Button title={'confirm'} onPress={()=>props.navigation.navigate('Confirm', {order})}/>
+        ) : null}
+        <View style={{ marginTop: 60, alignSelf: "center" }}>
+          <Button
+            title={"confirm"}
+            onPress={() => props.navigation.navigate("Confirm", { order })}
+          />
         </View>
       </Content>
     </Container>
