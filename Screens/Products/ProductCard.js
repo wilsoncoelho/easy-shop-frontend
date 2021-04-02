@@ -32,7 +32,7 @@ const ProductCard = (props) => {
       <Text style={styles.title}>
         {name.length > 15 ? name.substring(0, 15 - 3) + "..." : name}
       </Text>
-      <Text style={styles.price}>{price}</Text>
+      <Text style={styles.price}>${price}</Text>
       {countInStock > 0 ? (
         <View style={{ marginBottom: 60 }}>
           <EasyButton primary medium onPress={()=>{

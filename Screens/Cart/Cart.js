@@ -35,19 +35,26 @@ const Cart = (props) => {
       {props.cartItems.length ? (
         <Container>
           <H1 style={{ alignSelf: "center" }}>Cart</H1>
+         
           <SwipeListView
+          
             data={props.cartItems}
             renderItem={(data, index) => <CartItem key={index} item={data} />}
+       
             renderHiddenItem={(data) => (
               <View style={styles.hiddenContainer}>
                 <TouchableOpacity
+             
                   style={styles.hiddenButton}
                   onPress={() => props.removeFromCart(data.item)}
                 >
                   <Icon name="trash" color={"white"} size={30} />
                 </TouchableOpacity>
               </View>
-            )}
+            )
+            
+          
+          }
             disableRightSwipe={true}
             previewOpenDelay={3000}
             friction={1000}
